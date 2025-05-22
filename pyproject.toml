@@ -1,0 +1,18 @@
+[project]
+name = "dairy-ai"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "zakibadawi",email = "mog5808@gmail.com"}
+]
+readme = "README.md"
+requires-python = "^3.11"
+dependencies = [
+    "qdrant-client (>=1.14.2,<2.0.0)",
+    "openai (>=1.81.0,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
