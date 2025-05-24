@@ -2,11 +2,11 @@ import os
 from uuid import uuid4
 
 import openai
-from qdrant_client import QdrantClient
+from qdrant_client import AsyncQdrantClient
 from qdrant_client.http import models
 from dotenv import load_dotenv
-import time
-from types import DiaryEntry
+
+from types import InternalQdrantDiaryEntry
 from types import EntryType
 
 load_dotenv()
@@ -16,25 +16,21 @@ QDRANT_API_KEY = os.environ["QDRANT_API_KEY"]
 QDRANT_URL = os.environ["QDRANT_URL"]
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "diaries")
 
-client = QdrantClient(api_key=QDRANT_API_KEY, url=QDRANT_URL)
+client = AsyncQdrantClient(api_key=QDRANT_API_KEY, url=QDRANT_URL)
 
 
-def embed_text(text: str) -> list[float]:
-  response = openai.Embedding.create(
+async def embed_text(text: str) -> list[float]:
+  response = await openai.Embedding.acreate(
     input=text,
     model="text-embedding-ada-002"
   )
   return response['data'][0]['embedding']
 
 
-def store_diary_entry(diary_entry: DiaryEntry) -> str:
-  if diary_entry["tags"] is None:
-    tags = []
-  else:
-    tags = diary_entry["tags"]
+async def store_diary_entry(diary_entry: InternalQdrantDiaryEntry) -> str:
+  tags = diary_entry["tags"] if diary_entry["tags"] is not None else []
 
-  vector = embed_text(diary_entry["content"])
-
+  vector = await embed_text(diary_entry["vectorContent"])
   entry_id = str(uuid4())
 
   payload = {
@@ -44,11 +40,11 @@ def store_diary_entry(diary_entry: DiaryEntry) -> str:
     "content": diary_entry["content"],
     "mime_type": diary_entry["mime_type"],
     "tags": tags,
-    "created_at": int(time.time()),
-    "updated_at": int(time.time()),
+    "created_at": diary_entry["created_at"],
+    "updated_at": diary_entry["updated_at"],
   }
 
-  client.upsert(
+  await client.upsert(
     collection_name=QDRANT_COLLECTION,
     points=[
       models.PointStruct(id=entry_id, vector=vector, payload=payload)
