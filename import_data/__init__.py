@@ -1,1 +1,1 @@
-from .process_diaries import process_and_store_data
+from .process_diaries import process_and_store_data as process_and_store_data
