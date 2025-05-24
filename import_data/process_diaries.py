@@ -1,7 +1,7 @@
 import time
 import asyncio
 from pathlib import Path
-from typing import Any, Optional, Coroutine
+from typing import Any, Optional
 from uuid import uuid4
 
 import aiofiles
