@@ -16,3 +16,7 @@ class DiaryEntry(TypedDict):
     tags: List[str]
     created_at: int
     updated_at: int
+
+class InternalQdrantDiaryEntry(DiaryEntry):
+    id: str
+    vectorContent: str
