@@ -46,7 +46,7 @@ async def process_and_store_entry(
     try:
       async with aiofiles.open(txt_file, "r", encoding="utf-8") as f:
         content = await f.read()
-        date_time_from_filename = basename = os.path.splitext(txt_file.name  )[0]
+        date_time_from_filename = os.path.splitext(txt_file.name)[0]
         content_with_datetime = f"{content}\n{date_time_from_filename}"
 
       diary_entry: InternalQdrantDiaryEntry = {
