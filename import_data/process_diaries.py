@@ -74,7 +74,7 @@ async def process_and_store_entry(
 
 async def process_and_store_data(data_dir: str) -> Optional[list[Any]]:
   if not await does_collection_exist():
-    print(f"❌ You must create a collection first.")
+    print("❌ You must create a collection first.")
     return None
   else:
     base_path = Path(data_dir)
