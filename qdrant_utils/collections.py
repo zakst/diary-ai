@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from qdrant_client import AsyncQdrantClient
 from qdrant_client.http import models
 
-from types import PayloadIndexes
+from diary_types import PayloadIndexes
 
 load_dotenv()
 
@@ -29,7 +29,7 @@ async def create_collection():
 
 
 async def create_payload_indexes():
-  if not await client.collection_exists(QDRANT_COLLECTION):
+  if not await does_collection_exist():
     print(f"❌ Collection '{QDRANT_COLLECTION}' does not exist. Cannot create indexes.")
     return
 
@@ -53,3 +53,9 @@ async def create_payload_indexes():
       print(f"✅ Indexed field '{field}' as {schema.value}")
     except Exception as e:
       print(f"⚠️ Failed to index field '{field}': {e}")
+
+async def does_collection_exist() -> bool:
+  if await client.collection_exists(QDRANT_COLLECTION):
+    return True
+  else:
+    return False
