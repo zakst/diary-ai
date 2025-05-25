@@ -1,4 +1,5 @@
 import asyncio
+import os
 from pathlib import Path
 from typing import Any, Optional
 from uuid import uuid4
@@ -45,10 +46,12 @@ async def process_and_store_entry(
     try:
       async with aiofiles.open(txt_file, "r", encoding="utf-8") as f:
         content = await f.read()
+        date_time_from_filename = os.path.splitext(txt_file.name)[0]
+        content_with_datetime = f"{content}\n{date_time_from_filename}"
 
       diary_entry: InternalQdrantDiaryEntry = {
         "id": str(uuid4()),
-        "vectorContent": content,
+        "vectorContent": content_with_datetime,
         "user_uuid": user_uuid,
         "type": EntryType.TEXT,
         "source": EntrySource.LOCAL_IMPORT,

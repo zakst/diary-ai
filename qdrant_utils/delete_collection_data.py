@@ -12,6 +12,7 @@ QDRANT_COLLECTION: str = os.getenv("QDRANT_COLLECTION", "diaries")
 
 client: AsyncQdrantClient = AsyncQdrantClient(api_key=QDRANT_API_KEY, url=QDRANT_URL)
 
+
 async def delete_all_points():
   if not await client.collection_exists(QDRANT_COLLECTION):
     print(f"❌ Collection '{QDRANT_COLLECTION}' does not exist.")
@@ -26,5 +27,13 @@ async def delete_all_points():
   except Exception as e:
     print(f"⚠️ Failed to delete points from '{QDRANT_COLLECTION}': {e}")
 
+
 if __name__ == "__main__":
-  asyncio.run(delete_all_points())
+  confirmation = input(
+    f"⚠️ Are you sure you want to delete **all** points from '{QDRANT_COLLECTION}'? (yes/no): "
+  ).strip().lower()
+
+  if confirmation == "yes":
+    asyncio.run(delete_all_points())
+  else:
+    print("❌ Operation cancelled.")
