@@ -21,12 +21,14 @@ QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "diaries")
 
 client = AsyncQdrantClient(api_key=QDRANT_API_KEY, url=QDRANT_URL)
 
+
 async def embed_text(text: str) -> list[float]:
   response = await openAIClient.embeddings.create(
     input=text,
     model="text-embedding-ada-002"
   )
   return response.data[0].embedding
+
 
 async def diary_entry_exists_by_content(content: str) -> bool:
   response = await client.scroll(
@@ -44,13 +46,21 @@ async def diary_entry_exists_by_content(content: str) -> bool:
   )
   return len(response[0]) > 0
 
+
+def sanitize_text(text: str) -> str:
+  return (
+    text.replace("’", "'")
+    .replace("‘", "'")
+    .replace("“", '"')
+    .replace("”", '"')
+  )
+
 async def store_diary_entry(diary_entry: InternalQdrantDiaryEntry) -> str:
   if await diary_entry_exists_by_content(diary_entry["content"]):
     print(f"⏩ Entry already exists: {diary_entry['content']}")
     return "done"
   else:
     tags = diary_entry["tags"] if diary_entry["tags"] is not None else []
-
     vector = await embed_text(diary_entry["vectorContent"])
     entry_id = str(uuid4())
 
@@ -59,6 +69,7 @@ async def store_diary_entry(diary_entry: InternalQdrantDiaryEntry) -> str:
       "type": EntryType.TEXT,
       "source": diary_entry["source"],
       "content": diary_entry["content"],
+      "diary_entry": sanitize_text(diary_entry["vectorContent"]),
       "mime_type": diary_entry["mime_type"],
       "tags": tags,
       "created_at": diary_entry["created_at"],
@@ -71,6 +82,4 @@ async def store_diary_entry(diary_entry: InternalQdrantDiaryEntry) -> str:
         models.PointStruct(id=entry_id, vector=vector, payload=payload)
       ]
     )
-
-    print(f"✅ Stored diary entry with id: {entry_id}")
     return entry_id
