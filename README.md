@@ -10,7 +10,19 @@ diary-ai provides a pipeline for processing, embedding, and storing diary entrie
 
 #### External Services
 * Create a [Qdrant Account](https://qdrant.tech/) a free one will do
+
+#### Open AI
 * Create an [Open API Secret Key](https://platform.openai.com/api-keys)
+>It does not cost much to process and test but openai requires at least 5$ deposited
+
+#### Gemini
+* You will need a GCP account
+* Enable [Gemini API](https://ai.google.dev/) in google cloud console
+* Enable [Vertex AI](https://cloud.google.com/vertex-ai) in google cloud console
+* You will need gcloud
+  * You will need to `glcoud init`
+  * And `gcloud auth application-default login`
+* You will also need to enable billing
 
 ## Usage
 
