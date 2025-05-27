@@ -3,10 +3,10 @@ import os
 
 from generation_utils import folder_selection, process_prompt
 GENERATION_API = os.getenv("GENERATION_API")
+IS_VERBOSE = os.getenv("VERBOSE")
 
 async def main():
-  verbose_input = input("Verbose mode? (y/n) [n]: ").strip().lower()
-  is_verbose = verbose_input == "y"
+  is_verbose = IS_VERBOSE == "true"
   selected_diary = await folder_selection()
   if selected_diary is None:
     return
