@@ -2,7 +2,7 @@
 
 diary-ai processes, embed and stores diary entries in Qdrant vector database.
 
-Its an implementation of the [Retrieval-augmented generation](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)
+Its an implementation of the [Retrieval-augmented generation](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) architecture
 
 The `prompt.py` allows for prompting the diary data.
 
