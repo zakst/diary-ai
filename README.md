@@ -12,6 +12,14 @@ diary-ai provides a pipeline for processing, embedding, and storing diary entrie
 * Create a [Qdrant Account](https://qdrant.tech/) a free one will do
 * Create an [Open API Secret Key](https://platform.openai.com/api-keys)
 
+## Usage
+
+After installation, you can use diary-ai by running the following
+
+```shell
+  python prompt.py
+```
+
 ## Installation
 
 ```shell
@@ -25,9 +33,11 @@ QDRANT_URL=qdrant_endpoint # you can find it in the cluster
 QDRANT_API_KEY=api_key
 QDRANT_COLLECTION=collection_name # defaults to diaries
 OPEN_AI_API_KEY=api_key
+GEMINI_API_KEY=api_key
+GENERATION_API=openai # options are openai or gemini
 ```
 
-Lastly run the following script
+Run the following script
 
 ```shell
   python setup.py

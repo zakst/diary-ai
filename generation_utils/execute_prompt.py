@@ -3,25 +3,29 @@ from typing import List
 from openai import AsyncOpenAI
 from qdrant_client import AsyncQdrantClient
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue, SearchParams
+
+from generation_utils.gemini_generation import generate_using_gemini
+from generation_utils.open_ai_generation import generate_using_openai
 from qdrant_utils.qdrant_repository import embed_text
 
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION")
+GENERATION_API = os.getenv("GENERATION_API")
 
 qdrant_client = AsyncQdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 openai_client = AsyncOpenAI(api_key=os.getenv("OPEN_AI_API_KEY"))
 
 
-async def process_prompt(user_prompt: str, selected_user: str, is_verbose: bool = False) -> str:
+async def process_prompt(user_prompt: str, selected_user: str, is_verbose: bool = False) -> str | None:
   query_vector = await embed_text(user_prompt)
   if is_verbose:
     print(f"Query Vector: {query_vector}")
   search_result = await qdrant_client.search(
     collection_name=QDRANT_COLLECTION,
     query_vector=query_vector,
-    limit=5,
-    search_params=SearchParams(hnsw_ef=128),
+    limit=10,
+    search_params=SearchParams(hnsw_ef=128, exact=True),
     with_payload=True,
     query_filter=Filter(
       must=[
@@ -43,33 +47,10 @@ async def process_prompt(user_prompt: str, selected_user: str, is_verbose: bool 
   if is_verbose:
     print(f"Vector Search Context: {context}")
 
-  full_prompt = (
-    f"You are a helpful assistant. Use the context below to answer the question.\n\n"
-    f"Context:\n{context}\n\n"
-    f"Question: {user_prompt}"
-  )
-
-  if is_verbose:
-    print(f"Full Prompt: {full_prompt}")
-
-  response = await openai_client.chat.completions.create(
-    model="gpt-4",
-    messages=[
-      {
-        "role": "system",
-        "content": (
-          "You are an assistant that answers user questions based on diary entries retrieved using a vector search system. "
-          "Only use the provided context to generate responses. Be concise, informative, and assume the user is reading diary content."
-          "Answer in second person"
-        )
-      },
-      {
-        "role": "user",
-        "content": full_prompt
-      }
-    ]
-  )
-  if is_verbose:
-    print(f"Open AI Response: {response}")
-
-  return response.choices[0].message.content.strip()
+  if GENERATION_API == "openai":
+    openai_response = await generate_using_openai(context, user_prompt, is_verbose)
+    return openai_response
+  elif GENERATION_API == "gemini":
+    gemini_response = await generate_using_gemini(context, user_prompt, is_verbose)
+    return gemini_response
+  return None
