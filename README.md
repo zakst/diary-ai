@@ -19,6 +19,19 @@ After installation, you can use diary-ai by running the following
 ```shell
   python prompt.py
 ```
+## Before installation
+
+> `PRODUCT_API` effects the `embedding` of the data and the qdrant collection size
+> 
+> Which means if you store your data with openai embedding you must have it for embedding of the prompt as well
+
+> `GENERATION_API` is for deciding which api to send your prompt to 
+> 
+> So you can store your data with openai and send your prompt to gemini 
+
+Create two different collections and run setup twice to store the diaries with different embeddings
+if you want to play around
+
 
 ## Installation
 
@@ -33,7 +46,10 @@ QDRANT_URL=qdrant_endpoint # you can find it in the cluster
 QDRANT_API_KEY=api_key
 QDRANT_COLLECTION=collection_name # defaults to diaries
 OPEN_AI_API_KEY=api_key
+OPEN_AI_EMBEDDING_MODEL=text-embedding-ada-002 # default text-embedding-ada-002
 GEMINI_API_KEY=api_key
+GEMINI_EMBEDDING_MODEL=gemini-embedding-001 # default gemini-embedding-001
+PRODUCT_API=openai # options are openai or gemini
 GENERATION_API=openai # options are openai or gemini
 VERBOSE=false # defaults to false
 ```
