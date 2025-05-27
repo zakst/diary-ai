@@ -20,10 +20,10 @@ You can embed and prompt the data using `openai` or `gemini`
 > It does not cost much to process and test but openai requires at least 5$ deposited
 
 #### Gemini
-* You will need a GCP account
+* You will need a [GCP account](https://cloud.google.com/cloud-console)
 * Enable [Gemini API](https://ai.google.dev/) in google cloud console
 * Enable [Vertex AI](https://cloud.google.com/vertex-ai) in google cloud console
-* You will need gcloud
+* You will need [gcloud cli](https://cloud.google.com/sdk/docs/install)
   * You will need to `glcoud init`
   * And `gcloud auth application-default login`
 * You will also need to enable billing
