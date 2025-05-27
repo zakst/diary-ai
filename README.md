@@ -35,6 +35,7 @@ QDRANT_COLLECTION=collection_name # defaults to diaries
 OPEN_AI_API_KEY=api_key
 GEMINI_API_KEY=api_key
 GENERATION_API=openai # options are openai or gemini
+VERBOSE=false # defaults to false
 ```
 
 Run the following script
