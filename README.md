@@ -1,6 +1,10 @@
 # diary-ai
 
-diary-ai provides a pipeline for processing, embedding, and storing diary entries using OpenAI's embedding API and Qdrant vector database
+diary-ai provides a pipeline for processing, embedding and storing diary entries in Qdrant vector database.
+
+The `prompt.py` allows for prompting the diary data.
+
+You can embed and prompt the data using `openai` or `gemini`
 
 ## Prerequisites
 
