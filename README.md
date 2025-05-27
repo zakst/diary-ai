@@ -13,7 +13,7 @@ diary-ai provides a pipeline for processing, embedding, and storing diary entrie
 
 #### Open AI
 * Create an [Open API Secret Key](https://platform.openai.com/api-keys)
->It does not cost much to process and test but openai requires at least 5$ deposited
+> It does not cost much to process and test but openai requires at least 5$ deposited
 
 #### Gemini
 * You will need a GCP account
@@ -33,11 +33,15 @@ After installation, you can use diary-ai by running the following
 ```
 ## Before installation
 
+> ![Message](https://img.shields.io/badge/PRODUCT__API-EMBEDDING-green)
+> 
 > `PRODUCT_API` effects the `embedding` of the data and the qdrant collection size
 > 
 > Which means if you store your data with openai embedding you must have it for embedding of the prompt as well
 
-> `GENERATION_API` is for deciding which api to send your prompt to 
+> ![Message](https://img.shields.io/badge/GENERATION__API-EMBEDDING-green) 
+> 
+>`GENERATION_API` is for deciding which api to send your prompt to 
 > 
 > So you can store your data with openai and send your prompt to gemini 
 
