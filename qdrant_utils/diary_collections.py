@@ -10,9 +10,9 @@ load_dotenv()
 QDRANT_API_KEY: str = os.environ["QDRANT_API_KEY"]
 QDRANT_URL: str = os.environ["QDRANT_URL"]
 QDRANT_COLLECTION: str = os.getenv("QDRANT_COLLECTION", "diaries")
+PRODUCT_API = os.environ["PRODUCT_API"]
 
 client: AsyncQdrantClient = AsyncQdrantClient(api_key=QDRANT_API_KEY, url=QDRANT_URL)
-
 
 async def create_collection():
   if await client.collection_exists(QDRANT_COLLECTION):
@@ -21,7 +21,7 @@ async def create_collection():
     await client.create_collection(
       collection_name=QDRANT_COLLECTION,
       vectors_config=models.VectorParams(
-        size=1536,
+        size=1536 if PRODUCT_API == "openai" else 768,
         distance=models.Distance.COSINE
       )
     )
