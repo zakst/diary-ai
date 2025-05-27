@@ -2,6 +2,8 @@
 
 diary-ai processes, embed and stores diary entries in Qdrant vector database.
 
+Its an implementation of the [Retrieval-augmented generation](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)
+
 The `prompt.py` allows for prompting the diary data.
 
 You can embed and prompt the data using `openai` or `gemini`
@@ -39,13 +41,13 @@ After installation, you can use diary-ai by running the following
 
 > ![Message](https://img.shields.io/badge/PRODUCT__API-EMBEDDING-green)
 > 
-> `PRODUCT_API` effects the `embedding` of the data and the qdrant collection size
+> `PRODUCT_API` env var effects the `embedding` of the data and the qdrant collection size
 > 
 > Which means if you store your data with openai embedding you must have it for embedding of the prompt as well
 
-> ![Message](https://img.shields.io/badge/GENERATION__API-EMBEDDING-green) 
+> ![Message](https://img.shields.io/badge/GENERATION__API-LLM-green) 
 > 
->`GENERATION_API` is for deciding which api to send your prompt to 
+>`GENERATION_API` env var is for deciding which api to send your prompt to 
 > 
 > So you can store your data with openai and send your prompt to gemini 
 
