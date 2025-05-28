@@ -47,7 +47,7 @@ After installation, you can use diary-ai by running the following
 
 > ![Message](https://img.shields.io/badge/GENERATION__API-LLM-green) 
 > 
->`GENERATION_API` env var is for deciding which api to send your prompt to 
+>`GENERATION_LLM` env var is for deciding which api to send your prompt to 
 > 
 > So you can store your data with openai and send your prompt to gemini 
 
@@ -72,7 +72,7 @@ OPEN_AI_EMBEDDING_MODEL=text-embedding-ada-002 # default text-embedding-ada-002
 GEMINI_API_KEY=api_key
 GEMINI_EMBEDDING_MODEL=gemini-embedding-001 # default gemini-embedding-001
 PRODUCT_API=openai # options are openai or gemini
-GENERATION_API=openai # options are openai or gemini
+GENERATION_LLM=openai # options are openai or gemini
 VERBOSE=false # defaults to false
 ```
 
