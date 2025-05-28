@@ -1,12 +1,11 @@
 import os
 from typing import List
-from openai import AsyncOpenAI
 from qdrant_client import AsyncQdrantClient
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue, SearchParams
 
+from embeddings import embed_text
 from generation_utils.gemini_generation import generate_using_gemini
 from generation_utils.open_ai_generation import generate_using_openai
-from qdrant_utils.qdrant_repository import embed_text
 
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
@@ -14,8 +13,6 @@ QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION")
 GENERATION_LLM = os.getenv("GENERATION_LLM")
 
 qdrant_client = AsyncQdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-openai_client = AsyncOpenAI(api_key=os.getenv("OPEN_AI_API_KEY"))
-
 
 async def process_prompt(user_prompt: str, selected_user: str, is_verbose: bool = False) -> str | None:
   query_vector = await embed_text(user_prompt)
