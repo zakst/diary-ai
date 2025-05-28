@@ -11,7 +11,7 @@ from qdrant_utils.qdrant_repository import embed_text
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION")
-GENERATION_API = os.getenv("GENERATION_API")
+GENERATION_LLM = os.getenv("GENERATION_LLM")
 
 qdrant_client = AsyncQdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 openai_client = AsyncOpenAI(api_key=os.getenv("OPEN_AI_API_KEY"))
@@ -47,10 +47,10 @@ async def process_prompt(user_prompt: str, selected_user: str, is_verbose: bool 
   if is_verbose:
     print(f"Vector Search Context: {context}")
 
-  if GENERATION_API == "openai":
+  if GENERATION_LLM == "openai":
     openai_response = await generate_using_openai(context, user_prompt, is_verbose)
     return openai_response
-  elif GENERATION_API == "gemini":
+  elif GENERATION_LLM == "gemini":
     gemini_response = await generate_using_gemini(context, user_prompt, is_verbose)
     return gemini_response
   return None
