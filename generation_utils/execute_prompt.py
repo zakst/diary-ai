@@ -5,6 +5,7 @@ from qdrant_client.http.models import Filter, FieldCondition, MatchValue, Search
 
 from embeddings import embed_text
 from generation_utils.gemini_generation import generate_using_gemini
+from generation_utils.ollama_generation import generate_using_ollama
 from generation_utils.open_ai_generation import generate_using_openai
 
 QDRANT_URL = os.getenv("QDRANT_URL")
@@ -50,4 +51,7 @@ async def process_prompt(user_prompt: str, selected_user: str, is_verbose: bool 
   elif GENERATION_LLM == "gemini":
     gemini_response = await generate_using_gemini(context, user_prompt, is_verbose)
     return gemini_response
+  elif GENERATION_LLM == "ollama":
+    ollama_response = await generate_using_ollama(context, user_prompt, is_verbose)
+    return ollama_response
   return None
