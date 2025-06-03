@@ -19,6 +19,8 @@ You can embed and prompt the data using `openai` or `gemini`
 
 #### Open AI
 * Create an [Open API Secret Key](https://platform.openai.com/api-keys)
+* Update the `TEXT_EMBEDDING_PRODUCT` and `GENERATION_LLM`
+
 > It does not cost much to process and test but openai requires at least 5$ deposited
 
 #### Gemini
@@ -29,6 +31,15 @@ You can embed and prompt the data using `openai` or `gemini`
   * You will need to `glcoud init`
   * And `gcloud auth application-default login`
 * You will also need to enable billing
+* Update the `TEXT_EMBEDDING_PRODUCT` and `GENERATION_LLM`
+
+#### Ollama Models
+This is an option to run this project locally
+* Install Ollama
+  * `brew install ollama` for macOS
+  * `ollama serve`
+  * `ollama pull llama3`
+* Update the `TEXT_EMBEDDING_PRODUCT` and `GENERATION_LLM`
 
 ## Usage
 
@@ -39,17 +50,17 @@ After installation, you can use diary-ai by running the following
 ```
 ## Before installation
 
-> ![Message](https://img.shields.io/badge/PRODUCT__API-EMBEDDING-green)
+> ![Message](https://img.shields.io/badge/TEXT_EMBEDDING_PRODUCT-EMBEDDING-green)
 > 
-> `PRODUCT_API` env var effects the `embedding` of the data and the qdrant collection size
+> `TEXT_EMBEDDING_PRODUCT` env var effects the `embedding` of the data and the qdrant collection size
 > 
-> Which means if you store your data with openai embedding you must have it for embedding of the prompt as well
+> Set this variable to one of its options and run the setup.py. It's a one-to-one relationship with the collection
 
 > ![Message](https://img.shields.io/badge/GENERATION__API-LLM-green) 
 > 
 >`GENERATION_LLM` env var is for deciding which api to send your prompt to 
 > 
-> So you can store your data with openai and send your prompt to gemini 
+> So you can embed your data with openai but generate a response from gemini
 
 Create two different collections and run setup twice to store the diaries with different embeddings
 if you want to play around
@@ -71,9 +82,11 @@ OPEN_AI_API_KEY=api_key
 OPEN_AI_EMBEDDING_MODEL=text-embedding-ada-002 # default text-embedding-ada-002
 GEMINI_API_KEY=api_key
 GEMINI_EMBEDDING_MODEL=gemini-embedding-001 # default gemini-embedding-001
-PRODUCT_API=openai # options are openai or gemini
+TEXT_EMBEDDING_PRODUCT=openai # options are openai or gemini
 GENERATION_LLM=openai # options are openai or gemini
 VERBOSE=false # defaults to false
+OLLAMA_EMBEDDING_MODEL=all-mpnet-base-v2 # default all-mpnet-base-v2
+GOOGLE_CLOUD_PROJECT_ID=project_id
 ```
 
 Run the following script

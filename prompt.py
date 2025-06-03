@@ -12,7 +12,7 @@ async def main():
     return
   else:
     prompt = input(f"{selected_diary} > Enter your prompt: ")
-    print(f"🤖 {GENERATION_LLM}...")
+    print(f"🤖 {GENERATION_LLM} ...")
     response = await process_prompt(prompt, selected_diary, is_verbose)
     if response is None:
       print("❌ GENERATION_LLM in .env can be either openai or gemini")
