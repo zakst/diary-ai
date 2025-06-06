@@ -14,6 +14,14 @@ def check_required_env_vars() -> bool:
     "QDRANT_API_KEY",
     "QDRANT_COLLECTION",
     "OPEN_AI_API_KEY",
+    "OPEN_AI_EMBEDDING_MODEL",
+    "GEMINI_API_KEY",
+    "GEMINI_EMBEDDING_MODEL",
+    "OLLAMA_EMBEDDING_MODEL",
+    "GOOGLE_CLOUD_PROJECT_ID",
+    "TEXT_EMBEDDING_PRODUCT",
+    "GENERATION_LLM",
+    "VERBOSE",
   ]
 
   missing_vars = [var for var in required_vars if not os.getenv(var)]
