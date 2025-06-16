@@ -1,5 +1,9 @@
 # diary-ai
 
+<p align="center">
+  <img src="./images/wizard_diary.png" width="200" alt="Blobby Logo" />
+</p>
+
 diary-ai processes, embed and stores diary entries in Qdrant vector database.
 
 Its an implementation of the [Retrieval-augmented generation](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) architecture
