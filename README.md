@@ -1,6 +1,6 @@
-<table>
+<table style="border: none;">
   <tr>
-    <td>
+    <td style="vertical-align: top;">
       <h1>diary-ai</h1>
       <p>
         <strong>diary-ai</strong> processes, embeds and stores diary entries in Qdrant vector database.
@@ -16,7 +16,7 @@
         You can embed and prompt the data using <code>openai</code>, <code>gemini</code> or <code>ollama</code>.
       </p>
     </td>
-    <td align="right">
+    <td style="text-align: right; vertical-align: top;">
       <img src="./images/wizard_diary.png" width="200" alt="Wizard Diary Logo" />
     </td>
   </tr>
