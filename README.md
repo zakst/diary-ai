@@ -6,7 +6,7 @@ Its an implementation of the [Retrieval-augmented generation](https://en.wikiped
 
 The `prompt.py` allows for prompting the diary data.
 
-You can embed and prompt the data using `openai` or `gemini`
+You can embed and prompt the data using `openai`, `gemini` or `ollama`
 
 ## Prerequisites
 
