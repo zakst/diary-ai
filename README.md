@@ -6,7 +6,7 @@ Its an implementation of the [Retrieval-augmented generation](https://en.wikiped
 
 The `prompt.py` allows for prompting the diary data.
 
-You can embed and prompt the data using `openai` or `gemini`
+You can embed and prompt the data using `openai`, `gemini` or `ollama`
 
 ## Prerequisites
 
@@ -103,6 +103,11 @@ You can use the following script to delete all qdrant data in your `QDRANT_COLLE
 ```shell
   python qdrant_utils/delete_collection_data.py
 ```
+## Image to text processing
+`diary-ai` has a feature to convert images to text, which allows you to scan and import your paper diaries
+
+To use this feature 
+1. Install tesseract on macOs `brew install tesseract`
 
 ## The diary_samples
 
