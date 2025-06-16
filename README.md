@@ -1,16 +1,27 @@
-# diary-ai
+<table>
+  <tr>
+    <td>
+      <h1>diary-ai</h1>
+      <p>
+        <strong>diary-ai</strong> processes, embeds and stores diary entries in Qdrant vector database.
+      </p>
+      <p>
+        It’s an implementation of the
+        <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">Retrieval-augmented generation</a> architecture.
+      </p>
+      <p>
+        The <code>prompt.py</code> allows for prompting the diary data.
+      </p>
+      <p>
+        You can embed and prompt the data using <code>openai</code>, <code>gemini</code> or <code>ollama</code>.
+      </p>
+    </td>
+    <td align="right">
+      <img src="./images/wizard_diary.png" width="200" alt="Wizard Diary Logo" />
+    </td>
+  </tr>
+</table>
 
-<p align="center">
-  <img src="./images/wizard_diary.png" width="200" alt="Blobby Logo" />
-</p>
-
-diary-ai processes, embed and stores diary entries in Qdrant vector database.
-
-Its an implementation of the [Retrieval-augmented generation](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) architecture
-
-The `prompt.py` allows for prompting the diary data.
-
-You can embed and prompt the data using `openai`, `gemini` or `ollama`
 
 ## Prerequisites
 
